@@ -37,7 +37,7 @@ public class DetailActivity extends AppCompatActivity {
         descriptionTextView = (TextView) findViewById(R.id.description_textview_details);
 
         Intent intentThatStartedThisActivity = getIntent();
-        Movie movie = (Movie) intentThatStartedThisActivity.getSerializableExtra(MainActivity.MOVIE_KEY);
+        Movie movie = intentThatStartedThisActivity.getParcelableExtra(MainActivity.MOVIE_KEY);
 
         titleTextView.setText(movie.getTitle());
         DateTime dateTime = DateTime.parse(movie.getReleaseDate());

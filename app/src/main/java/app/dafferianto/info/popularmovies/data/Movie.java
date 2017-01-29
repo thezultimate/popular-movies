@@ -1,8 +1,9 @@
 package app.dafferianto.info.popularmovies.data;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Movie implements Serializable {
+public class Movie implements Parcelable {
     private int id;
     private String posterPath;
     private String title;
@@ -66,5 +67,41 @@ public class Movie implements Serializable {
     public void setOverview(String overview) {
         this.overview = overview;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(posterPath);
+        dest.writeString(title);
+        dest.writeString(releaseDate);
+        dest.writeDouble(voteAverage);
+        dest.writeString(overview);
+    }
+
+    private Movie(Parcel in) {
+        id = in.readInt();
+        posterPath = in.readString();
+        title = in.readString();
+        releaseDate = in.readString();
+        voteAverage = in.readDouble();
+        overview = in.readString();
+    }
+
+    public static final Parcelable.Creator<Movie> CREATOR = new Creator<Movie>() {
+        @Override
+        public Movie createFromParcel(Parcel source) {
+            return new Movie(source);
+        }
+
+        @Override
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
 
 }

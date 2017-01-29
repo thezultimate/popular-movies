@@ -12,9 +12,9 @@
             android:id="@+id/title_textview_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="40sp"
-            android:padding="25sp"
-            android:background="#123456"
+            android:textSize="@dimen/title_size_details"
+            android:padding="@dimen/title_padding_details"
+            android:background="@color/color_background_title_details"
             android:textColor="@android:color/white"/>
 
         <LinearLayout
@@ -27,8 +27,8 @@
                 android:id="@+id/poster_details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="20sp"
-                android:paddingLeft="20sp" />
+                android:paddingTop="@dimen/body_padding_details"
+                android:paddingLeft="@dimen/body_padding_details" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -39,18 +39,18 @@
                     android:id="@+id/releasedate_textview_details"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingTop="20sp"
-                    android:paddingLeft="20sp"
-                    android:paddingRight="20sp"
-                    android:textSize="16sp"/>
+                    android:paddingTop="@dimen/body_padding_details"
+                    android:paddingLeft="@dimen/body_padding_details"
+                    android:paddingRight="@dimen/body_padding_details"
+                    android:textSize="@dimen/body_text_size_details"/>
 
                 <TextView
                     android:id="@+id/rating_textview_details"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="20sp"
-                    android:paddingRight="20sp"
-                    android:textSize="16sp"/>
+                    android:paddingLeft="@dimen/body_padding_details"
+                    android:paddingRight="@dimen/body_padding_details"
+                    android:textSize="@dimen/body_text_size_details"/>
 
             </LinearLayout>
 
@@ -60,7 +60,7 @@
             android:id="@+id/description_textview_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="20sp"/>
+            android:padding="@dimen/body_padding_details"/>
 
     </LinearLayout>
 

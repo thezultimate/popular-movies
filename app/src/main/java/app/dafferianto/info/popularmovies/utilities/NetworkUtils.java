@@ -11,7 +11,8 @@ import java.net.URL;
 import java.util.Scanner;
 
 import app.dafferianto.info.popularmovies.R;
-import app.dafferianto.info.popularmovies.data.Sorting;
+
+import static app.dafferianto.info.popularmovies.MainActivity.TOP_RATED;
 
 public final class NetworkUtils {
 
@@ -21,12 +22,12 @@ public final class NetworkUtils {
 
     private static final String POSTER_SIZE = "w185";
 
-    public static URL buildMovieUrl(Context context, Sorting sorting) {
+    public static URL buildMovieUrl(Context context, String sorting) {
         String movieBaseUrl = context.getResources().getString(R.string.movie_base_url);
         String apiKey = context.getResources().getString(R.string.api_key);
         Uri builtUri = Uri.parse(movieBaseUrl)
                 .buildUpon()
-                .appendPath(sorting == Sorting.TOP_RATED ? SORTING_TOP_RATED : SORTING_POPULAR)
+                .appendPath(sorting.equals(TOP_RATED) ? SORTING_TOP_RATED : SORTING_POPULAR)
                 .appendQueryParameter(API_KEY_PARAM, apiKey)
                 .build();
 

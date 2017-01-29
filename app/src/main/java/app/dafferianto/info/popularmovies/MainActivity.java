@@ -2,7 +2,6 @@ package app.dafferianto.info.popularmovies;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -14,16 +13,16 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.net.URL;
 import java.util.List;
 
 import app.dafferianto.info.popularmovies.data.Movie;
-import app.dafferianto.info.popularmovies.data.Sorting;
-import app.dafferianto.info.popularmovies.utilities.MovieUtils;
-import app.dafferianto.info.popularmovies.utilities.NetworkUtils;
+import app.dafferianto.info.popularmovies.tasks.AsyncTaskCompleteListener;
+import app.dafferianto.info.popularmovies.tasks.FetchMovieDataTask;
 
 public class MainActivity extends AppCompatActivity implements MainAdapter.MainAdapterOnClickHandler {
     public static final String MOVIE_KEY = "info.dafferianto.key.MOVIE";
+    public static final String POPULAR = "POPULAR";
+    public static final String TOP_RATED = "TOP_RATED";
 
     private static final int MAIN_COLUMN_COUNT = 2;
     private static final boolean FIXED_SIZE = true;
@@ -33,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements MainAdapter.MainA
     private ProgressBar loadingIndicator;
     private TextView errorMessageTextView;
 
-    private Sorting currentSorting;
+    private String currentSorting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements MainAdapter.MainA
         loadingIndicator = (ProgressBar) findViewById(R.id.loading_indicator_main);
         errorMessageTextView = (TextView) findViewById(R.id.error_message_main);
 
-        showPosters(Sorting.POPULAR);
+        showPosters(POPULAR);
     }
 
     @Override
@@ -68,15 +67,15 @@ public class MainActivity extends AppCompatActivity implements MainAdapter.MainA
         int id = item.getItemId();
 
         if (id == R.id.action_popular) {
-            if (currentSorting != Sorting.POPULAR) {
-                showPosters(Sorting.POPULAR);
+            if (currentSorting != POPULAR) {
+                showPosters(POPULAR);
             }
             return true;
         }
 
         if (id == R.id.action_top_rated) {
-            if (currentSorting != Sorting.TOP_RATED) {
-                showPosters(Sorting.TOP_RATED);
+            if (currentSorting != TOP_RATED) {
+                showPosters(TOP_RATED);
             }
             return true;
         }
@@ -97,10 +96,10 @@ public class MainActivity extends AppCompatActivity implements MainAdapter.MainA
         showPosters(currentSorting);
     }
 
-    private void showPosters(Sorting sorting) {
+    private void showPosters(String sorting) {
         showPostersUi();
         mainAdapter.setMovieData(null);
-        setTitle(sorting == Sorting.POPULAR ? R.string.popular_title : R.string.top_rated_title);
+        setTitle(sorting.equals(POPULAR) ? R.string.popular_title : R.string.top_rated_title);
         currentSorting = sorting;
         loadPosters(sorting);
     }
@@ -115,40 +114,15 @@ public class MainActivity extends AppCompatActivity implements MainAdapter.MainA
         recyclerView.setVisibility(View.INVISIBLE);
     }
 
-    private void loadPosters(Sorting sorting) {
-        new FetchMovieDataTask().execute(sorting.name());
+    private void loadPosters(String sorting) {
+        loadingIndicator.setVisibility(View.VISIBLE);
+        new FetchMovieDataTask(this, new FetchMovieDataTaskCompleteListener()).execute(sorting);
     }
 
-    public class FetchMovieDataTask extends AsyncTask<String, Void, List<Movie>> {
+    public class FetchMovieDataTaskCompleteListener implements AsyncTaskCompleteListener<List<Movie>> {
 
         @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            loadingIndicator.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        protected List<Movie> doInBackground(String... params) {
-            if (params.length == 0) {
-                return null;
-            }
-
-            String sorting = params[0];
-            URL movieRequestUrl = NetworkUtils.buildMovieUrl(MainActivity.this, Sorting.valueOf(sorting));
-
-            try {
-                String jsonMovieResponse = NetworkUtils.getResponseFromHttpUrl(movieRequestUrl);
-                List<Movie> movies = MovieUtils.getMovieList(jsonMovieResponse);
-                return movies;
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
-
-        }
-
-        @Override
-        protected void onPostExecute(List<Movie> movies) {
+        public void onTaskComplete(List<Movie> movies) {
             loadingIndicator.setVisibility(View.INVISIBLE);
             if (movies != null) {
                 showPostersUi();
