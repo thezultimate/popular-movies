@@ -27,6 +27,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+
+        <provider
+            android:authorities="info.dafferianto.popularmovies"
+            android:name=".data.FavoriteContentProvider"
+            android:exported="false" />
     </application>
 
 </manifest>

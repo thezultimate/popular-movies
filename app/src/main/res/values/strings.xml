@@ -4,11 +4,26 @@
     <string name="app_name">Popular Movies</string>
     <string name="popular_title">Popular Movies</string>
     <string name="top_rated_title">Top-Rated Movies</string>
+    <string name="favorite_title">Favorite Movies</string>
     <string name="detail_title">Movie Details</string>
+    <string name="review_detail_title">Reviews</string>
+    <string name="trailer_detail_title">Trailers</string>
+    <string name="favorite_add_detail_title">Add to Favorite</string>
+    <string name="favorite_remove_detail_title">Remove from Favorite</string>
+
     <string name="movie_base_url">https://api.themoviedb.org/3/movie</string>
     <string name="poster_base_url">http://image.tmdb.org/t/p</string>
-    <string name="error_message">An error has occurred. Please tap here to refresh.</string>
+    <string name="youtube_base_url">http://www.youtube.com/watch</string>
+
+    <string name="error_message_main">An error occurred while loading movies. Please tap here to refresh.</string>
+    <string name="empty_favorite_message_main">Empty favorite.</string>
+    <string name="error_message_reviews_trailers">An error occurred while loading trailers and reviews. Please tap here to refresh.</string>
+    <string name="favorite_add_success_message">Movie added to favorite.</string>
+    <string name="favorite_add_failure_message">Unable to add movie to favorite.</string>
+    <string name="favorite_remove_success_message">Movie removed from favorite.</string>
+    <string name="favorite_remove_failure_message">Unable to remove movie from favorite.</string>
 
     <string name="action_popular">Sort by most popular</string>
     <string name="action_top_rated">Sort by top-rated</string>
+    <string name="action_favorite">List favorite</string>
 </resources>

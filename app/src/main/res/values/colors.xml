@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="color_background_title_details">#123456</color>
+    <color name="color_background_trailer_details">#201E1E</color>
 </resources>

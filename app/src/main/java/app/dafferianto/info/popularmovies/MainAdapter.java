@@ -27,6 +27,10 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainAdapterVie
         this.clickHandler = clickHandler;
     }
 
+    public List<Movie> getMovieData() {
+        return movieData;
+    }
+
     public void setMovieData(List<Movie> movieData) {
         this.movieData = movieData;
         notifyDataSetChanged();

@@ -4,10 +4,16 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="error_text_size_main">30sp</dimen>
+    <dimen name="error_text_size_details">20sp</dimen>
     <dimen name="loading_indicator_size_main">40dp</dimen>
+    <dimen name="loading_indicator_size_details">30dp</dimen>
 
     <dimen name="title_size_details">40sp</dimen>
+    <dimen name="review_title_size_details">30sp</dimen>
+    <dimen name="trailer_title_size_details">30sp</dimen>
     <dimen name="body_text_size_details">16sp</dimen>
     <dimen name="title_padding_details">25dp</dimen>
     <dimen name="body_padding_details">20dp</dimen>
+    <dimen name="favorite_text_padding_details">10dp</dimen>
+    <dimen name="no_padding">0dp</dimen>
 </resources>
